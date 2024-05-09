@@ -74,6 +74,11 @@ git submodule init
 ```
 git submodule update
 ```
+Use it on your own project:
+```
+git clone URL
+```
+rm -rf .git && git init  //Delete initial Git repository link and create a new empty Git repository ready to be linked.
 
 
 #### Available Scripts
