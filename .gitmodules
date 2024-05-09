@@ -2,3 +2,6 @@
 [submodule "UserAuth-MERN-front-"]
 	path = UserAuth-MERN-front-
 	url = https://github.com/KmiloLopez/UserAuth-MERN-front-
+[submodule "UserAuth-Front"]
+	path = UserAuth-Front
+	url = https://github.com/KmiloLopez/UserAuth-MERN-front-

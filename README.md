@@ -68,6 +68,11 @@ Install dependencies for both ends by creating two separate terminal instances:
 ```
 npm i
 ```
+Update Submodule that contains frontend configuration:
+
+```
+git submodule update
+```
 
 
 #### Available Scripts
