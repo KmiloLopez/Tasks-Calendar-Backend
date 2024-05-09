@@ -1,4 +1,4 @@
 
 [submodule "UserAuth-MERN-front-"]
-	path = FrontendGU
+	path = UserAuth-MERN-front-
 	url = https://github.com/KmiloLopez/UserAuth-MERN-front-
