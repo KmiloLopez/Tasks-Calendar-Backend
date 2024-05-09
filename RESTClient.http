@@ -1,0 +1,95 @@
+get http://localhost:3000/
+
+###
+post http://localhost:4000/api/register
+Content-Type: application/json
+
+{
+    "username": "asher4",
+    "email": "asher4@asher.com", 
+    "password": "asher4"
+}
+
+###
+post http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "name": "SegundoUsuario",
+    "password": "55555"
+    
+}
+###
+post http://localhost:4000/api/login
+Content-Type: application/json
+
+{
+    
+    "email": "asher4@asher.com", 
+    "password": "asher4"
+}
+###
+
+post http://localhost:4000/api/logout
+Content-Type: application/json
+
+{
+    
+    "email": "asher4@asher.com", 
+    "password": "asher4"
+}
+###
+
+get http://localhost:4000/api/profile
+Content-Type: application/json
+
+{
+    
+    "email": "asher4@asher.com", 
+    "password": "asher4"
+}
+###
+post http://localhost:4000/api/tasks
+Content-Type: application/json
+
+{
+    
+    "title": "My third task",  
+    "description": "Exited to see my task description"
+}
+###
+get http://localhost:4000/api/tasks
+Content-Type: application/json
+
+{
+    
+    "title": "My third task",  
+    "description": "Exited to see my task description"
+}
+###
+put http://localhost:4000/api/tasks/663824acd45b17d47c323ff7
+Content-Type: application/json
+
+{
+    
+     
+    "description": "Second task updated with PUT"
+}
+###
+delete http://localhost:4000/api/tasks/663824b4d45b17d47c323ff9
+Content-Type: application/json
+
+{
+    
+     
+    "description": "Third task updated with PUT"
+}
+###
+post http://localhost:4000/api/register
+Content-Type: application/json
+
+{
+    "username": "111",
+    "email": "admin@",
+    "password": "j545464654"
+}

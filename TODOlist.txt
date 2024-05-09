@@ -1,0 +1,19 @@
+<QUESTIONS>
+
+Cuando se agrega una fecha este la agrega un dia antes
+
+Cuando me logueo donde queda guardado el ID?
+En que momento se agrega el id de la persona logeada a la nota creada?
+
+Al seleccionar una fecha este muestra las  notas de esa fecha
+Nombre del mes, cambiar iconos adelante y atras
+
+
+cami@cami.com
+123456
+
+en .env
+DATABASE_URI="mongodb+srv:/"
+SECRET_KEY_JWT="secret-key-jwt"
+
+
