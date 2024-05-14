@@ -5,6 +5,7 @@ import {
   getTask,
   getTasks,
   updateTask,
+  getTasksByDate,
 } from "../controllers/tasks.controller.js";
 import { authRequired } from "../middlewares/validate.token.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
@@ -21,5 +22,7 @@ router.get("/tasks/:id", authRequired, getTask);
 router.put("/tasks/:id", authRequired, updateTask);
 
 router.delete("/tasks/:id", authRequired, deleteTask);
+
+router.get("/tasks/date/:id", authRequired, getTasksByDate);
 
 export default router;

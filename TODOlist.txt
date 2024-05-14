@@ -8,6 +8,46 @@ En que momento se agrega el id de la persona logeada a la nota creada?
 Al seleccionar una fecha este muestra las  notas de esa fecha
 Nombre del mes, cambiar iconos adelante y atras
 
+Once you login, load all user data y let it available to use and show
+
+Crear rama nueva y guardar en esa a ver si al regresar quedaen la otra
+
+RUTAS BACKEND
+
+app.use("/api/auth", authRoutes);
+app.use("/api", taskRoutes);
+/////taskRoutes
+router.get("/tasks", authRequired, getTasks);
+router.post("/tasks", authRequired, validateSchema(createTaskSchema), createTask);
+router.get("/tasks/:id", authRequired, getTask);
+router.put("/tasks/:id", authRequired, updateTask);
+router.delete("/tasks/:id", authRequired, deleteTask);
+/////authRoutes
+router.post('/register', validateSchema(registerSchema), register)
+router.post('/login', validateSchema(loginSchema), login)
+router.post('/logout', logout)
+router.get('/profile',authRequired, profile)
+router.get('/verify', verifyToken)
+
+RUTAS FRONTEND
+
+<BrowserRouter>
+          <main className="container content-container mx-auto px-10 md:px-0">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+               <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+             
+              <Route element={<ProtectedRoute />}>
+                <Route path="/tasks" element={<TasksPage />} />
+                <Route path="/add-task" element={<TaskFormPage />} />
+                <Route path="/tasks/:id" element={<TaskFormPage />} />
+                <Route path="/profile" element={<h1>Profile</h1>} />
+              </Route>
+            </Routes>
+<BrowserRouter/>
+
 
 cami@cami.com
 123456

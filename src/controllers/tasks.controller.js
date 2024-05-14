@@ -1,10 +1,31 @@
 import Task from "../models/task.model.js";
 
+//req.user.id usuario que realizó la solicitud 
+//populate() se utiliza para poblar (llenar) los campos de referencia (como "user" en este caso) con los datos reales en lugar de solo sus IDs.
+
 export const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ user : req.user.id }).populate("user");
     res.json(tasks);
   } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const getTasksByDate = async (req, res) => {
+  try {
+    const allTasks = await Task.find({ user : req.user.id }).populate("user");
+    //res.json({ tasks: allTasks});
+    const dateProvided = new Date(req.params.id);// Suponiendo que la fecha viene como un string en formato 'YYYY-MM-DD'0
+    const dateTasks = allTasks.filter(task => {
+      // .date es como se almaceno en mongoDB
+      const fechaTarea = new Date(task.date); // Ajusta esto según cómo estén almacenadas tus fechas en las tareas
+      return fechaTarea.toDateString() === dateProvided.toDateString(); // Comparamos solo las fechas (ignorando la hora)
+    });
+
+    if (!dateTasks) return res.status(404).json({ message: "No tasks on this day yet" });
+    return res.json(dateTasks);
+  } catch (error) {// si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
     return res.status(500).json({ message: error.message });
   }
 };
