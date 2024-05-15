@@ -20,23 +20,23 @@ Content-Type: application/json
     
 }
 ###
-post http://localhost:4000/api/login
+post http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {
     
-    "email": "asher4@asher.com", 
-    "password": "asher4"
+    "email": "cami@cami.com", 
+    "password": "123456"
 }
 ###
 
-post http://localhost:4000/api/logout
+post http://localhost:4000/api/auth/logout
 Content-Type: application/json
 
 {
     
-    "email": "asher4@asher.com", 
-    "password": "asher4"
+    "email": "cami@cami.com", 
+    "password": "123456"
 }
 ###
 
@@ -55,7 +55,8 @@ Content-Type: application/json
 {
     
     "title": "My third task",  
-    "description": "Exited to see my task description"
+    "description": "Exited to see my task description",
+    "date": "2024-05-18T00:07:38.318Z"
 }
 ###
 get http://localhost:4000/api/tasks

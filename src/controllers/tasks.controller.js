@@ -13,13 +13,25 @@ export const getTasks = async (req, res) => {
 };
 
 export const getTasksByDate = async (req, res) => {
+  // try {
+  //   const tasks = await Task.find({ user : req.user.id }).populate("user");
+  //   res.json(tasks);
+  // } catch (error) {
+  //   return res.status(500).json({ message: error.message });
+  // }
+
+
   try {
     const allTasks = await Task.find({ user : req.user.id }).populate("user");
-    //res.json({ tasks: allTasks});
+   console.log("puedo hacer un console.log", typeof(allTasks));
+   console.log("fecha pasada como id",req.params.id)
     const dateProvided = new Date(req.params.id);// Suponiendo que la fecha viene como un string en formato 'YYYY-MM-DD'0
+    console.log("dateProvided", dateProvided);
     const dateTasks = allTasks.filter(task => {
       // .date es como se almaceno en mongoDB
+      console.log("taks.date", task.date)
       const fechaTarea = new Date(task.date); // Ajusta esto según cómo estén almacenadas tus fechas en las tareas
+      console.log("fechaTare",fechaTarea);
       return fechaTarea.toDateString() === dateProvided.toDateString(); // Comparamos solo las fechas (ignorando la hora)
     });
 
@@ -28,6 +40,7 @@ export const getTasksByDate = async (req, res) => {
   } catch (error) {// si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
     return res.status(500).json({ message: error.message });
   }
+
 };
 
 export const createTask = async (req, res) => {
@@ -42,7 +55,7 @@ export const createTask = async (req, res) => {
     await newTask.save();
     res.json(newTask);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ messager: error.message });
   }
 };
 
