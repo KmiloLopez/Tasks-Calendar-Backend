@@ -13,20 +13,11 @@ export const getTasks = async (req, res) => {
 };
 
 export const getTasksByDate = async (req, res) => {
-  // try {
-  //   const tasks = await Task.find({ user : req.user.id }).populate("user");
-  //   res.json(tasks);
-  // } catch (error) {
-  //   return res.status(500).json({ message: error.message });
-  // }
-
-
   try {
     const allTasks = await Task.find({ user : req.user.id }).populate("user");
-   console.log("puedo hacer un console.log", typeof(allTasks));
-   console.log("fecha pasada como id",req.params.id)
+  
     const dateProvided = new Date(req.params.id);// Suponiendo que la fecha viene como un string en formato 'YYYY-MM-DD'0
-    console.log("dateProvided", dateProvided);
+    
     const dateTasks = allTasks.filter(task => {
       // .date es como se almaceno en mongoDB
       console.log("taks.date", task.date)
@@ -45,17 +36,23 @@ export const getTasksByDate = async (req, res) => {
 
 export const createTask = async (req, res) => {
   try {
-    const { title, description, date } = req.body;
+    const { title, description, date, priority, time, timeout, status } = req.body;
     const newTask = new Task({
       title,
       description,
       date,
+      time,
+      timeout,
+      priority,
+      status,
       user: req.user.id,
     });
     await newTask.save();
     res.json(newTask);
   } catch (error) {
-    return res.status(500).json({ messager: error.message });
+    return res.status(500).json({ 
+      data: "error en tasks.controller.js",
+      messager: error.message });
   }
 };
 
@@ -73,10 +70,10 @@ export const deleteTask = async (req, res) => {
 
 export const updateTask = async (req, res) => {
   try {
-    const { title, description, date } = req.body;
+    const { title, description, date, status } = req.body;
     const taskUpdated = await Task.findOneAndUpdate(
       { _id: req.params.id },
-      { title, description, date },
+      { title, description, date, status },
       { new: true }//es para que muestre al final el valor nuevo y no el viejo
     );
     return res.json(taskUpdated);

@@ -10,7 +10,10 @@ Nombre del mes, cambiar iconos adelante y atras
 
 Once you login, load all user data y let it available to use and show
 
-Crear rama nueva y guardar en esa a ver si al regresar quedaen la otra
+//en TasksPage con el cambio de taskStatus se hace una nueva renderizacion de tasks para mostrar si la tarea se completo
+aveces no quita o agrega correctamente, se podria mostrar los cambios en pantalla y agregar un boton de guardado de cambios para hacer menos solicitudes a la API
+
+Style Calendar https://www.youtube.com/watch?v=95Tyz7AzBMc
 
 RUTAS BACKEND
 

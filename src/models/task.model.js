@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//models and how we save on mongoose
 const taskSchema = new mongoose.Schema(
   {
     title: {
@@ -8,6 +8,22 @@ const taskSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
+    },
+    priority: {
+      type: String,
+      required: true,
+    },
+    time: {
+      type: String,
+      required: true,
+    },
+    timeout: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: Boolean,
       required: true,
     },
     date: {
