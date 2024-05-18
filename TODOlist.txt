@@ -13,7 +13,15 @@ Once you login, load all user data y let it available to use and show
 //en TasksPage con el cambio de taskStatus se hace una nueva renderizacion de tasks para mostrar si la tarea se completo
 aveces no quita o agrega correctamente, se podria mostrar los cambios en pantalla y agregar un boton de guardado de cambios para hacer menos solicitudes a la API
 
-Style Calendar https://www.youtube.com/watch?v=95Tyz7AzBMc
+Advanced MUI edit components https://www.youtube.com/watch?v=mu8-u7V7Z8s
+Pending dark mode other form https://www.youtube.com/watch?v=WTchW0LdWL0       MUY BUEN VIDEO
+
+Additional info dark mode master https://www.youtube.com/watch?v=6OQrXWbhGIA
+
+  QUIERO QUE AL AGREGAR UNA TAREA NUEVA ME MUESTRE UN MENSAJE QUE LA TAREA FUE CREADA CORRECTAMENT, NOTIFLIX O SWEETaLERT2 
+  Y MUESTRE POP UP AGREGAR OTRA TAREA EN ESTA FECHA? SI{DEJAMOS LA VENTANA CON CAMPOS VACIOS PARA QUE PUEDA AGRGAR OTRA}
+NO{SE CIERRA LA VENTANA}
+
 
 RUTAS BACKEND
 
