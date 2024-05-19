@@ -96,3 +96,36 @@ export const getTask = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const getMonthTasksByDate = async (req, res) => {
+  try {
+    const date = req.params.id;
+    if (!date) {
+      return res.status(400).send("Date query parameter is required");
+    }
+
+    const inputDate = new Date(date);
+    const month = inputDate.getMonth();
+    const year = inputDate.getFullYear();
+
+    // Obtener todas las tareas del usuario actual
+    const allTasks = await Task.find({ user: req.user.id }).populate("user");
+
+    // Filtrar las tareas por el mes y año especificados
+    const tasks = allTasks.filter((task) => {
+      const taskDate = new Date(task.date);
+      return taskDate.getMonth() === month && taskDate.getFullYear() === year;
+    });
+
+    // Extraer los días únicos
+    const daysWithData = [
+      ...new Set(tasks.map((task) => new Date(task.date).getDate())),
+    ];
+    const adjustedDays = daysWithData.map((day) => day + 1);
+
+    res.json(adjustedDays);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
