@@ -1,11 +1,11 @@
 import Task from "../models/task.model.js";
 
-//req.user.id usuario que realizó la solicitud 
+//req.user.id usuario que realizó la solicitud
 //populate() se utiliza para poblar (llenar) los campos de referencia (como "user" en este caso) con los datos reales en lugar de solo sus IDs.
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({ user : req.user.id }).populate("user");
+    const tasks = await Task.find({ user: req.user.id }).populate("user");
     res.json(tasks);
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -14,29 +14,31 @@ export const getTasks = async (req, res) => {
 
 export const getTasksByDate = async (req, res) => {
   try {
-    const allTasks = await Task.find({ user : req.user.id }).populate("user");
-  
-    const dateProvided = new Date(req.params.id);// Suponiendo que la fecha viene como un string en formato 'YYYY-MM-DD'0
-    
-    const dateTasks = allTasks.filter(task => {
+    const allTasks = await Task.find({ user: req.user.id }).populate("user");
+
+    const dateProvided = new Date(req.params.id); // Suponiendo que la fecha viene como un string en formato 'YYYY-MM-DD'0
+
+    const dateTasks = allTasks.filter((task) => {
       // .date es como se almaceno en mongoDB
-      console.log("taks.date", task.date)
+      console.log("taks.date", task.date);
       const fechaTarea = new Date(task.date); // Ajusta esto según cómo estén almacenadas tus fechas en las tareas
-      console.log("fechaTare",fechaTarea);
+      console.log("fechaTare", fechaTarea);
       return fechaTarea.toDateString() === dateProvided.toDateString(); // Comparamos solo las fechas (ignorando la hora)
     });
 
-    if (!dateTasks) return res.status(404).json({ message: "No tasks on this day yet" });
+    if (!dateTasks)
+      return res.status(404).json({ message: "No tasks on this day yet" });
     return res.json(dateTasks);
-  } catch (error) {// si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
+  } catch (error) {
+    // si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
     return res.status(500).json({ message: error.message });
   }
-
 };
 
 export const createTask = async (req, res) => {
   try {
-    const { title, description, date, priority, time, timeout, status } = req.body;
+    const { title, description, date, priority, time, timeout, status } =
+      req.body;
     const newTask = new Task({
       title,
       description,
@@ -50,9 +52,10 @@ export const createTask = async (req, res) => {
     await newTask.save();
     res.json(newTask);
   } catch (error) {
-    return res.status(500).json({ 
+    return res.status(500).json({
       data: "error en tasks.controller.js",
-      messager: error.message });
+      messager: error.message,
+    });
   }
 };
 
@@ -70,11 +73,12 @@ export const deleteTask = async (req, res) => {
 
 export const updateTask = async (req, res) => {
   try {
-    const { title, description, date, status } = req.body;
+    const { title, description, date, status, priority, time, timeout } =
+      req.body;
     const taskUpdated = await Task.findOneAndUpdate(
       { _id: req.params.id },
-      { title, description, date, status },
-      { new: true }//es para que muestre al final el valor nuevo y no el viejo
+      { title, description, date, status, priority, time, timeout },
+      { new: true } //es para que muestre al final el valor nuevo y no el viejo
     );
     return res.json(taskUpdated);
   } catch (error) {
@@ -87,7 +91,8 @@ export const getTask = async (req, res) => {
     const task = await Task.findById(req.params.id);
     if (!task) return res.status(404).json({ message: "Task not found" });
     return res.json(task);
-  } catch (error) {// si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
+  } catch (error) {
+    // si esto no se hace y hay una peticion que causa un error, se cae el servidor y hay que reiniciarlo
     return res.status(500).json({ message: error.message });
   }
 };
