@@ -1,3 +1,12 @@
+Previous json front
+  // "scripts": {
+  //   "start": "vite --port 3000 --open",
+  //   "dev": "vite --port 3000 --open",
+  //   "build": "vite build",
+  //   "serve": "vite preview",
+  //   "test": "vitest"
+  // },
+
 <QUESTIONS>
 
 Cuando se agrega una fecha este la agrega un dia antes
