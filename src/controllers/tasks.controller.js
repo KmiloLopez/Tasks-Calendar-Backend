@@ -121,7 +121,7 @@ export const getMonthTasksByDate = async (req, res) => {
     const daysWithData = [
       ...new Set(tasks.map((task) => new Date(task.date).getDate())),
     ];
-    const adjustedDays = daysWithData.map((day) => day + 1);
+    const adjustedDays = daysWithData.map((day) => day + 0);
 
     res.json(adjustedDays);
   } catch (error) {
