@@ -25,6 +25,7 @@ export const register = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
+      sameSite: "none", // to enable cross-site usage
     });
     await newUser
       .save() //guarda en mongo
@@ -59,7 +60,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
-      //sameSite: "Strict", // Asegura que la cookie sólo se envíe con solicitudes del mismo sitio
+      sameSite: "none", // to enable cross-site usage
     });
     res.json({
       id: userFound.id,
