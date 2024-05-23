@@ -21,6 +21,6 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true })); //(credentials) tamb
 
 app.use(morgan("dev")); //morgan setup
 app.use("/auth", authRoutes);
-app.use("/", taskRoutes);
+app.use(taskRoutes);
 
 export default app;
