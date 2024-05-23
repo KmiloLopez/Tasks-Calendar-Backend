@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(cors({ origin: FRONTEND_URL, credentials: true })); //(credentials) tambien para que permita el paso de las cookies en la solucitud comunicacion back and front en navegador ya puede guardar las cookies recibidas
 
 app.use(morgan("dev")); //morgan setup
-app.use("/api/auth", authRoutes);
-app.use("/api", taskRoutes);
+app.use("/auth", authRoutes);
+app.use("/", taskRoutes);
 
 export default app;
