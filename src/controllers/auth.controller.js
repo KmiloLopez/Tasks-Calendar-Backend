@@ -25,8 +25,7 @@ export const register = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
-      sameSite: "strict", // to enable cross-site usage
-      domain: ".onrender.com",
+      sameSite: "none", // to enable cross-site usage
     });
     await newUser
       .save() //guarda en mongo
@@ -61,8 +60,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
-      sameSite: "strict", // to enable cross-site usage
-      domain: ".onrender.com",
+      sameSite: "none",
     });
     res.json({
       id: userFound.id,
