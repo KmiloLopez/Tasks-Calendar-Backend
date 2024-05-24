@@ -14,7 +14,8 @@ import { createTaskSchema } from "../schemas/task.schema.js";
 
 const router = Router();
 
-router.get("/tasks", authRequired, getTasks);
+//router.get("/tasks", authRequired, getTasks);
+router.get("/tasks", getTasks);
 
 router.post(
   "/tasks",
