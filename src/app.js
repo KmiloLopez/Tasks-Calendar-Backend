@@ -1,4 +1,5 @@
 import express from "express"; //ECMAScript6 compatible
+import path from "path"; //
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
