@@ -29,11 +29,11 @@ app.use(taskRoutes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "UserAuth-Front", "dist")));
+app.use(express.static(path.join(__dirname, "../UserAuth-Front", "dist")));
 
 // Redirige todas las solicitudes a `index.html`
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "UserAuth-Front", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../UserAuth-Front", "dist", "index.html"));
 });
 
 export default app;
