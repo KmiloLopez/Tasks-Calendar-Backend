@@ -23,4 +23,11 @@ app.use(morgan("dev")); //morgan setup
 app.use("/auth", authRoutes);
 app.use(taskRoutes);
 
+app.use(express.static(path.join(__dirname, "build")));
+
+// Redirige todas las solicitudes a `index.html`
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 export default app;
