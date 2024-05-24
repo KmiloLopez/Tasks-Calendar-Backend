@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --env-file .env index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
