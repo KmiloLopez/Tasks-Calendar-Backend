@@ -22,7 +22,7 @@ export const register = async (req, res) => {
     });
 
     const token = await createAccessToken({ id: newUser._id });
-    localStorage.setItem("token", token);
+
     // res.cookie("token", token, {
     //   httpOnly: true,
     //   secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
@@ -32,7 +32,12 @@ export const register = async (req, res) => {
     await newUser
       .save() //guarda en mongo
       .then((data) =>
-        res.json({ id: data.id, username: data.username, email: data.email })
+        res.json({
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          token: token,
+        })
       )
       .catch((err) => res.json({ message: err }));
   } catch (err) {
@@ -58,7 +63,7 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(404).json({ message: "password mismatch" });
 
     const token = await createAccessToken({ id: userFound._id });
-    localStorage.setItem("token", token);
+
     // res.cookie("token", token, {
     //   httpOnly: true,
     //   secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
@@ -69,9 +74,10 @@ export const login = async (req, res) => {
       id: userFound.id,
       username: userFound.username,
       email: userFound.email,
+      token: token,
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ messagefromcontroller: err.message });
   }
 };
 
@@ -86,7 +92,8 @@ export const profile = async (req, res) => {
   return res.json({ message: "user found", id: userFound._id });
 };
 export const verifyToken = async (req, res) => {
-  const { token } = req.cookies;
+  const authHeader = req.headers.authorization;
+  const token = authHeader.split(" ")[1];
 
   if (!token) return res.status(401).json({ message: "unauthorized" });
   jwt.verify(token, process.env.SECRET_KEY_JWT, async (err, user) => {
