@@ -22,11 +22,13 @@ export const register = async (req, res) => {
     });
 
     const token = await createAccessToken({ id: newUser._id });
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
-      sameSite: "none", // to enable cross-site usage
-    });
+    localStorage.setItem("token", token);
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
+    //   sameSite: "none", // to enable cross-site usage
+    //   domain: ".onrender.com",
+    // });
     await newUser
       .save() //guarda en mongo
       .then((data) =>
@@ -56,12 +58,13 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(404).json({ message: "password mismatch" });
 
     const token = await createAccessToken({ id: userFound._id });
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
-      sameSite: "none",
-    });
+    localStorage.setItem("token", token);
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production", // Solo enviar cookies sobre HTTPS
+    //   sameSite: "none",
+    //   domain: ".onrender.com",
+    // });
     res.json({
       id: userFound.id,
       username: userFound.username,
