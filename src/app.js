@@ -2,6 +2,7 @@ import express from "express"; //ECMAScript6 compatible
 import path from "path"; //
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.routes.js"; //como se exporta como default se puede traer y cambiar nombre a authToutes
 import taskRoutes from "./routes/tasks.routes.js";
@@ -23,6 +24,10 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true })); //(credentials) tamb
 app.use(morgan("dev")); //morgan setup
 app.use("/auth", authRoutes);
 app.use(taskRoutes);
+
+// Configuración de __dirname en ES6
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "build")));
 
